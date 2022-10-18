@@ -1,1 +1,0 @@
-cat ./script/init.sql | docker exec -i litcode-db mysql -plit
