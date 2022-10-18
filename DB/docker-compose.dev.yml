@@ -7,14 +7,16 @@ services:
     image: arm64v8/mysql:8.0.31
     # for m1
     container_name: litcode-db
-    command: --default-authentication-plugin=mysql_native_password
+    # command: --default-authentication-plugin=mysql_native_password
     ports:
       - 3306:3306
     restart: always
     environment:
       - MYSQL_USER=lit
-      - MYSQL_PASSWORD=lit
-      - MYSQL_ROOT_PASSWORD=lit
-      - MYSQL_DATABASE=litcode
+      - MYSQL_PASSWORD=litcodeDB23!
+      - MYSQL_ROOT_PASSWORD=litcodeDB23!
+      - MYSQL_DATABASE=litcodedb
     volumes:
+      - ./script/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./script/seed.sql:/docker-entrypoint-initdb.d/seed.sql
       - ./mysql:/var/lib/mysql

@@ -1,4 +1,4 @@
-use litcode-db;
+use litcodedb;
 SET GLOBAL TIME_ZONE = 'Asia/Seoul';
 
 INSERT INTO users (id,user_id,email,password,solved_id,created,updated) VALUE (1,'xymon2','test@email.com','aaa','[1]','2021-01-14 15:52:44','2021-01-14 15:52:44');

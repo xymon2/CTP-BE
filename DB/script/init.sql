@@ -1,4 +1,4 @@
-use litcode-db;
+use litcodedb;
 SET GLOBAL TIME_ZONE = 'Asia/Seoul';
 
 CREATE TABLE users(
