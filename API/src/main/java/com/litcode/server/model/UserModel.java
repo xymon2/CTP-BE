@@ -14,39 +14,37 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
 @Entity
-@Table(
-  name = "users",
-  uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id" }) }
-)
+@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id" }) })
 public class UserModel {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
 
-  @Column(name = "user_id", nullable = false)
-  private String userId;
+	@Column(name = "user_id", nullable = false)
+	private String userId;
 
-  @Column(name = "email", nullable = false)
-  private String email;
+	@Column(name = "email", nullable = false)
+	private String email;
 
-  @Column(name = "password", nullable = false)
-  private String password;
+	@Column(name = "password", nullable = false)
+	private String password;
 
-  @Column(name = "solved_id", columnDefinition = "json")
-  private String solvedId;
+	@Column(name = "solved_id", columnDefinition = "json")
+	private String solvedId;
 
-  // @Column(
-  //   name = "created",
-  //   columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
-  // )
-  @CreationTimestamp
-  private Timestamp created;
+	// @Column(
+	// name = "created",
+	// columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP"
+	// )
+	@CreationTimestamp
+	private Timestamp created;
 
-  // @Column(
-  //   name = "updated",
-  //   columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-  // )
-  @UpdateTimestamp
-  private Timestamp updated;
+	// @Column(
+	// name = "updated",
+	// columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE
+	// CURRENT_TIMESTAMP"
+	// )
+	@UpdateTimestamp
+	private Timestamp updated;
 }
