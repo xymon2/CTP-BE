@@ -19,9 +19,9 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/sign-in")
-	public String signIn(@RequestBody SignInRequest signInInfo) {
+	public UserProfile signIn(@RequestBody SignInRequest signInInfo) {
 		UserProfile ret = userService.getUserInfo(signInInfo);
-		return "sd";
+		return ret;
 	}
 
 	@PostMapping("/")

@@ -1,6 +1,7 @@
 package com.litcode.server.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.BasicJsonParser;
@@ -22,15 +23,16 @@ public class UserServiceImpl implements UserService {
 	public UserProfile getUserInfo(SignInRequest signInInfo) {
 		UserModel user = userRepository.findByUserIdAndPassword(signInInfo.getId(), signInInfo.getPassword());
 
-		String savedSolvedId = user.getSolvedId();
-		JsonParser a = new BasicJsonParser();
-		System.out.println(a.parseList(savedSolvedId));
+		String solvedIdString = user.getSolvedId();
+		JsonParser jsonParser = new BasicJsonParser();
+
+		List<Object> solvedId = jsonParser.parseList(solvedIdString);
 
 		UserProfile userProfile = UserProfile.builder()
 				.id(user.getId())
 				.userId(user.getUserId())
 				.email(user.getEmail())
-				.solvedId(new ArrayList<Integer>())
+				.solvedId(solvedId)
 				.build();
 
 		return userProfile;

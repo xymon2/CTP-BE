@@ -12,14 +12,14 @@ public class UserProfile implements Serializable {
   private Integer id;
   private String userId;
   private String email;
-  private List<Integer> solvedId;
+  private List<Object> solvedId;
 
   @Builder
   public UserProfile(
       @NonNull Integer id,
       @NonNull String userId,
       @NonNull String email,
-      @NonNull List<Integer> solvedId) {
+      @NonNull List<Object> solvedId) {
     this.id = id;
     this.userId = userId;
     this.email = email;
