@@ -1,4 +1,4 @@
-package com.litcode.server.payload;
+package com.litcode.server.dto;
 
 import lombok.Data;
 

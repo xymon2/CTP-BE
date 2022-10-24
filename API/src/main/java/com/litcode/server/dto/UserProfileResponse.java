@@ -1,3 +1,5 @@
+package com.litcode.server.dto;
+
 import java.io.Serializable;
 import java.util.List;
 import lombok.Builder;
