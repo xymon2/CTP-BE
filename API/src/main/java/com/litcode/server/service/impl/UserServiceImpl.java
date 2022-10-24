@@ -8,9 +8,9 @@ import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.stereotype.Service;
 
+import com.litcode.server.dto.SignInRequest;
+import com.litcode.server.dto.UserProfile;
 import com.litcode.server.model.UserModel;
-import com.litcode.server.payload.SignInRequest;
-import com.litcode.server.payload.UserProfile;
 import com.litcode.server.repository.UserRepository;
 import com.litcode.server.service.UserService;
 
