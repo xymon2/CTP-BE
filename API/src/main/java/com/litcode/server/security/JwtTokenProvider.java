@@ -1,5 +1,6 @@
 package com.litcode.server.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -7,8 +8,8 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SecurityException;
+import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +18,18 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+
+@Slf4j
 @Component
-public class JwtTokenProvider implements InitializingBean {
+public class JwtTokenProvider {
 	private String jwtSecret = "dasdasddsadasdasdasdasgnfsdkgsgsfdklgnfdnmekehwdkfhesdfhsfhksdhfksdfnv";
 	private Key jwtKey;
-	private int jwtExpirationInMs = 1800;
+	private int jwtExpirationInMs = 3600000;
 
 	// decode jwt secret string to key
-	@Override
-	public void afterPropertiesSet() {
+	@PostConstruct
+	protected void init() {
 		byte[] keyBytes = Decoders.BASE64.decode(jwtSecret);
 		this.jwtKey = Keys.hmacShaKeyFor(keyBytes);
 	}
@@ -36,20 +40,29 @@ public class JwtTokenProvider implements InitializingBean {
 		Date now = new Date();
 		Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
-		Map<String, Object> payloads = new HashMap<>();
-
-		payloads.put("userId", userPrincipal.getUsername());
-
 		return Jwts.builder()
 				.setIssuedAt(new Date())
+				.claim("userId", userPrincipal.getUsername())
 				.setExpiration(expiryDate)
 				.signWith(jwtKey)
 				.compact();
 	}
 
+	public String getUserIdFromJWT(String jwtToken) {
+
+		Claims claims = Jwts.parserBuilder()
+				.setSigningKey(jwtKey)
+				.build()
+				.parseClaimsJws(jwtToken)
+				.getBody();
+
+		return claims.get("userId").toString();
+
+	}
+
 	public boolean validateToken(String authToken) {
+
 		try {
-			System.out.println("dasdas");
 			Jwts.parserBuilder().setSigningKey(jwtKey).build().parseClaimsJws(authToken);
 			return true;
 		} catch (SecurityException ex) {

@@ -47,4 +47,8 @@ public class UserModel {
 	// )
 	@UpdateTimestamp
 	private Timestamp updated;
+
+	public UserModel orElseThrow(Object object) {
+		return null;
+	}
 }
