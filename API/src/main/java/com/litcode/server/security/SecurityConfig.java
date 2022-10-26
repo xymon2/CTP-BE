@@ -35,17 +35,14 @@ public class SecurityConfig {
 				// Error handling in security filter
 				// .exceptionHandling()
 				// .accessDeniedHandler(null)
-				// .authenticationEntryPoint(null)
+				// .authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				// .and()
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests()
 				.antMatchers(HttpMethod.POST,
-						"/**/sign-in")
-				.permitAll()
-				.antMatchers(HttpMethod.POST,
-						"/**/test")
+						"/**/auth")
 				.permitAll()
 				.anyRequest().authenticated();
 

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,6 +23,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 
+	@Autowired
+	private CustomUserDetailsService customUserDetailsService;
+
+	// Check auth of token in header.
 	protected void doFilterInternal(HttpServletRequest request,
 			HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
@@ -27,16 +34,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 			String jwtToken = getJwtTokenFromRequest(request);
 
+			// Check token existence and validity of it.
 			if (StringUtils.hasText(jwtToken) &&
 					jwtTokenProvider.validateToken(jwtToken)) {
-				// if (StringUtils.hasText(jwtToken)) {
-				log.info(jwtToken);
-				jwtTokenProvider.getUserIdFromJWT(jwtToken);
 
+				String userId = jwtTokenProvider.getUserIdFromJWT(jwtToken);
+				// Check token information is valid
+				UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId);
+				// Save authentication info to security context
+				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+						userDetails, null,
+						userDetails.getAuthorities());
+
+				SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 			}
 
+			// TODO
+			// error handling
 		} catch (Exception ex) {
-			System.out.println(ex);
+			System.out.println("A!@!?!?!?");
 
 		}
 
