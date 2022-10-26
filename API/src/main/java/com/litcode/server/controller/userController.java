@@ -1,7 +1,5 @@
 package com.litcode.server.controller;
 
-import com.litcode.server.dto.SignInRequest;
-import com.litcode.server.dto.UserProfile;
 import com.litcode.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +16,4 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/sign-in")
-	public UserProfile signIn(@RequestBody SignInRequest signInInfo) {
-		UserProfile ret = userService.getUserInfo(signInInfo);
-		return ret;
-	}
-
-	@PostMapping("/")
-	public String signUp() {
-		throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "WAIT");
-	}
 }
