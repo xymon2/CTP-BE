@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping(ControllerUtils.prefix + "/codes")
-public class CodeController {
+@RequestMapping(ControllerUtils.prefix + "/problems")
+public class ProblemController {
 
 	@GetMapping("/")
 	private String getCode() {

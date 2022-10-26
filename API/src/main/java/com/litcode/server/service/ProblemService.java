@@ -1,5 +1,5 @@
 package com.litcode.server.service;
 
-public class CodeService {
+public class ProblemService {
 
 }
