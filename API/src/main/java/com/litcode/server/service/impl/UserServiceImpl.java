@@ -1,6 +1,5 @@
 package com.litcode.server.service.impl;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import com.litcode.server.dto.SignInRequest;
 import com.litcode.server.dto.UserProfile;
 import com.litcode.server.model.UserModel;
 import com.litcode.server.repository.UserRepository;
-import com.litcode.server.security.JwtTokenProvider;
 import com.litcode.server.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -21,9 +19,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class UserServiceImpl implements UserService {
-
-	@Autowired
-	private JwtTokenProvider jwtTokenProvider;
 
 	@Autowired
 	UserRepository userRepository;

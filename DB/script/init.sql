@@ -13,9 +13,10 @@ CREATE TABLE users(
 
 CREATE TABLE problems(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    name VARCHAR(255),
-    description TEXT,
-    sample_input TEXT
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    sample_input TEXT NOT NULL,
+    UNIQUE (name)
 );
 
 CREATE TABLE skeleton_code(
