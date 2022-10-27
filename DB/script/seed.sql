@@ -12,6 +12,6 @@ INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
 INSERT INTO problems (id,name,description,sample_input) VALUE (2,'sort','sortproblem','[1,5,2]');
 INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (4,2,'JavaScript','JS solution');
 INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (5,2,'Python3','Python3 solution');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (6,2,'Java','Python3 solution');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (6,2,'Java','JAVAsolution');
 INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (2,2,'[1,4,2]','[1,2,4]',10);
 
