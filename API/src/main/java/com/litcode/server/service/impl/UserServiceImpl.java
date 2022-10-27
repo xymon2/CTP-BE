@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.litcode.server.dto.SignInRequest;
 import com.litcode.server.dto.UserProfile;
-import com.litcode.server.model.UserModel;
+import com.litcode.server.model.User;
 import com.litcode.server.repository.UserRepository;
 import com.litcode.server.service.UserService;
 
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 	UserRepository userRepository;
 
 	public UserProfile getUserInfo(SignInRequest signInInfo) {
-		UserModel user = userRepository.findByUserId(signInInfo.getId())
+		User user = userRepository.findByUserId(signInInfo.getId())
 				.orElseThrow(() -> new UsernameNotFoundException("NOT FOUND USERNAME: " +
 						signInInfo.getId()));
 

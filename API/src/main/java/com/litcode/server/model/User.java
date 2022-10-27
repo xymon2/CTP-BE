@@ -15,7 +15,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Data
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id" }) })
-public class UserModel {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +48,7 @@ public class UserModel {
 	@UpdateTimestamp
 	private Timestamp updated;
 
-	public UserModel orElseThrow(Object object) {
+	public User orElseThrow(Object object) {
 		return null;
 	}
 
