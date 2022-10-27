@@ -40,7 +40,21 @@ CREATE TABLE test_cases(
     score INT DEFAULT 0
 );
 
-CREATE TABLE solving_problems(
+CREATE TABLE problems_in_progress(
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id)
+    REFERENCES users(id) 
+    ON DELETE CASCADE,
+    problem_id INT NOT NULL,
+    FOREIGN KEY(problem_id)  
+    REFERENCES problems(id)
+    ON DELETE CASCADE,
+    language TEXT NOT NULL,
+    code TEXT
+);
+
+CREATE TABLE problems_solved(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id)
@@ -53,5 +67,6 @@ CREATE TABLE solving_problems(
     language TEXT NOT NULL,
     code TEXT,
     score INT default 0,
-    time INT default 0
+    runtime INT default 0,
+    created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
