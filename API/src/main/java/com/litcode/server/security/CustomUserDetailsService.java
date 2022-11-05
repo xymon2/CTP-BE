@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import com.litcode.server.model.UserModel;
+import com.litcode.server.model.User;
 import com.litcode.server.repository.UserRepository;
 
 // make an userDetails object for auth
@@ -20,20 +20,20 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-		UserModel userModel = userRepository.findByUserId(username)
+		User user = userRepository.findByUserId(username)
 				.orElseThrow(() -> new UsernameNotFoundException("NOT FOUND USERNAME: " +
 						username));
 
-		return new CustomUserDetails(userModel);
+		return new CustomUserDetails(user);
 	}
 }
 
 class CustomUserDetails implements UserDetails {
 
-	private UserModel userModel;
+	private User user;
 
-	public CustomUserDetails(UserModel userModel) {
-		this.userModel = userModel;
+	public CustomUserDetails(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -48,16 +48,16 @@ class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return userModel.getPassword();
+		return user.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return userModel.getUserId();
+		return user.getUserId();
 	}
 
 	public String getUserEmail() {
-		return userModel.getEmail();
+		return user.getEmail();
 	}
 
 	@Override
