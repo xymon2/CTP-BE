@@ -10,7 +10,7 @@ public interface ProblemService {
 
 	List<ProblemSummary> getAllProblems();
 
-	String runCode();
+	String runCode(String userId, String code, String input, String language);
 
 	String submitCode();
 }

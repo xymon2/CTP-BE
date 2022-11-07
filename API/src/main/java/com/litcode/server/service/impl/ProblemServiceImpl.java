@@ -37,11 +37,18 @@ public class ProblemServiceImpl implements ProblemService {
 		return problem;
 	}
 
-	public String runCode() {
+	public String runCode(String userId, String code, String input, String language) {
+
+		log.info(userId);
+		log.info(code);
+		log.info(input);
+		log.info(language);
+
 		return "run";
 	}
 
 	public String submitCode() {
 		return "submit";
 	}
+
 }
