@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,17 +28,13 @@ public class ProblemController {
 	ProblemService problemService;
 
 	@GetMapping("")
-	private List<ProblemSummary> getAllProblem() {
-
-		return problemService.getAllProblems();
+	private ResponseEntity<List<ProblemSummary>> getAllProblem() {
+		return ResponseEntity.ok().body(problemService.getAllProblems());
 	}
 
 	@GetMapping("/{id}")
-	private Problem getOneProblem(@PathVariable(name = "id") Integer id) {
-		// throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "WAIT");
-
-		return problemService.getOneProblem(id);
-
+	private ResponseEntity<Problem> getOneProblem(@PathVariable(name = "id") Integer id) {
+		return ResponseEntity.ok().body(problemService.getOneProblem(id));
 	}
 
 	@PostMapping("/run")

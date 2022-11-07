@@ -26,7 +26,6 @@ public class ProblemServiceImpl implements ProblemService {
 
 		List<ProblemSummary> problemList = new ArrayList<ProblemSummary>();
 		for (Problem problem : problems) {
-
 			problemList.add(new ProblemSummary(problem.getId(), problem.getName()));
 		}
 
@@ -34,9 +33,7 @@ public class ProblemServiceImpl implements ProblemService {
 	}
 
 	public Problem getOneProblem(Integer id) {
-
 		Problem problem = problemRepository.findById(1).orElseThrow();
-
 		return problem;
 	}
 
