@@ -11,6 +11,7 @@ public class UserProfile implements Serializable {
 
   private Integer id;
   private String userId;
+  private String name;
   private String email;
   private List<Object> solvedId;
 
@@ -18,10 +19,12 @@ public class UserProfile implements Serializable {
   public UserProfile(
       @NonNull Integer id,
       @NonNull String userId,
+      @NonNull String name,
       @NonNull String email,
       @NonNull List<Object> solvedId) {
     this.id = id;
     this.userId = userId;
+    this.name = name;
     this.email = email;
     this.solvedId = solvedId;
   }
