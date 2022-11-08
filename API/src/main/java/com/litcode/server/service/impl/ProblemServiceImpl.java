@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.litcode.server.dto.ProblemSummary;
+import com.litcode.server.grpcClient.GrpcClient;
 import com.litcode.server.model.Problem;
 import com.litcode.server.repository.ProblemRepository;
 import com.litcode.server.service.ProblemService;
@@ -19,6 +20,9 @@ public class ProblemServiceImpl implements ProblemService {
 
 	@Autowired
 	ProblemRepository problemRepository;
+
+	@Autowired
+	GrpcClient grpcClient;
 
 	public List<ProblemSummary> getAllProblems() {
 
@@ -44,6 +48,8 @@ public class ProblemServiceImpl implements ProblemService {
 		log.info(input);
 		log.info(language);
 
+		log.info("grpc start");
+		grpcClient.test();
 		return "run";
 	}
 

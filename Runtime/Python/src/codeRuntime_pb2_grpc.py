@@ -2,10 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-import pythonRuntime_pb2 as pythonRuntime__pb2
+import codeRuntime_pb2 as codeRuntime__pb2
 
 
-class CodingTestStub(object):
+class CodeRuntimeStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -15,18 +15,18 @@ class CodingTestStub(object):
             channel: A grpc.Channel.
         """
         self.RunCode = channel.unary_unary(
-                '/CodingTest/RunCode',
-                request_serializer=pythonRuntime__pb2.RunRequest.SerializeToString,
-                response_deserializer=pythonRuntime__pb2.RunResponse.FromString,
+                '/CodeRuntime/RunCode',
+                request_serializer=codeRuntime__pb2.RunRequest.SerializeToString,
+                response_deserializer=codeRuntime__pb2.RunResponse.FromString,
                 )
         self.SubmitCode = channel.unary_unary(
-                '/CodingTest/SubmitCode',
-                request_serializer=pythonRuntime__pb2.SubmitRequest.SerializeToString,
-                response_deserializer=pythonRuntime__pb2.SubmitResponse.FromString,
+                '/CodeRuntime/SubmitCode',
+                request_serializer=codeRuntime__pb2.SubmitRequest.SerializeToString,
+                response_deserializer=codeRuntime__pb2.SubmitResponse.FromString,
                 )
 
 
-class CodingTestServicer(object):
+class CodeRuntimeServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def RunCode(self, request, context):
@@ -43,26 +43,26 @@ class CodingTestServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_CodingTestServicer_to_server(servicer, server):
+def add_CodeRuntimeServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'RunCode': grpc.unary_unary_rpc_method_handler(
                     servicer.RunCode,
-                    request_deserializer=pythonRuntime__pb2.RunRequest.FromString,
-                    response_serializer=pythonRuntime__pb2.RunResponse.SerializeToString,
+                    request_deserializer=codeRuntime__pb2.RunRequest.FromString,
+                    response_serializer=codeRuntime__pb2.RunResponse.SerializeToString,
             ),
             'SubmitCode': grpc.unary_unary_rpc_method_handler(
                     servicer.SubmitCode,
-                    request_deserializer=pythonRuntime__pb2.SubmitRequest.FromString,
-                    response_serializer=pythonRuntime__pb2.SubmitResponse.SerializeToString,
+                    request_deserializer=codeRuntime__pb2.SubmitRequest.FromString,
+                    response_serializer=codeRuntime__pb2.SubmitResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'CodingTest', rpc_method_handlers)
+            'CodeRuntime', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class CodingTest(object):
+class CodeRuntime(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -76,9 +76,9 @@ class CodingTest(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CodingTest/RunCode',
-            pythonRuntime__pb2.RunRequest.SerializeToString,
-            pythonRuntime__pb2.RunResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/CodeRuntime/RunCode',
+            codeRuntime__pb2.RunRequest.SerializeToString,
+            codeRuntime__pb2.RunResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -93,8 +93,8 @@ class CodingTest(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/CodingTest/SubmitCode',
-            pythonRuntime__pb2.SubmitRequest.SerializeToString,
-            pythonRuntime__pb2.SubmitResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/CodeRuntime/SubmitCode',
+            codeRuntime__pb2.SubmitRequest.SerializeToString,
+            codeRuntime__pb2.SubmitResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
