@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.litcode.server.dto.ProblemRunRequest;
+import com.litcode.server.dto.ProblemRunResponse;
 import com.litcode.server.dto.ProblemSummary;
 import com.litcode.server.model.Problem;
+import com.litcode.server.model.ProblemInProgress;
 import com.litcode.server.repository.ProblemRepository;
 import com.litcode.server.service.ProblemService;
 
@@ -40,10 +42,22 @@ public class ProblemController {
 		return ResponseEntity.ok().body(problemService.getOneProblem(id));
 	}
 
-	@PostMapping("/run")
-	private String runCode(Authentication authentication, @RequestBody ProblemRunRequest runReq) {
-		return problemService.runCode(authentication.getName(), runReq.getCode(), runReq.getInput(),
+	@GetMapping("/{id}/progress")
+	private ResponseEntity<ProblemInProgress> getOneInProgressCode(Authentication authentication,
+			@PathVariable(name = "id") Integer id) {
+		return ResponseEntity.ok().body(problemService.getOneProblemInProgress(id, authentication.getName()));
+	}
+
+	@PostMapping("/{id}/run")
+	private ResponseEntity<ProblemRunResponse> runCode(Authentication authentication,
+			@PathVariable(name = "id") Integer id,
+			@RequestBody ProblemRunRequest runReq) {
+		ProblemRunResponse res = problemService.runCode(id, authentication.getName(),
+				runReq.getCode(),
+				runReq.getInput(),
 				runReq.getLanguage());
+
+		return ResponseEntity.ok().body(res);
 	}
 
 	@PostMapping("/submit")
