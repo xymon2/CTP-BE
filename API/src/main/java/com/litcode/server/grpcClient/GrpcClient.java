@@ -36,14 +36,20 @@ public class GrpcClient {
 
 		switch (language) {
 			case "python":
-				RunResponse pyRes = this.pyStub.runCode(runReq);
-				return ProblemRunResponse.builder().stdout(pyRes.getStdout()).output(pyRes.getOutput()).build();
+				try {
+					RunResponse pyRes = this.pyStub.runCode(runReq);
+					return ProblemRunResponse.builder().stdout(pyRes.getStdout()).output(pyRes.getOutput()).build();
+				} catch (Exception e) {
+					log.error(String.format("GRPC ERROR-Python %s", e.getMessage()));
+					throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+				}
 
 			case "javascript":
 				try {
 					RunResponse jsRes = this.jsStub.runCode(runReq);
 					return ProblemRunResponse.builder().stdout(jsRes.getStdout()).output(jsRes.getOutput()).build();
 				} catch (Exception e) {
+					log.error(String.format("GRPC ERROR -JavaScript %s", e.getMessage()));
 					throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 
@@ -55,6 +61,5 @@ public class GrpcClient {
 				// custom error handling
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "NOT SUPPORTED LANGUAGE");
 		}
-
 	}
 }
