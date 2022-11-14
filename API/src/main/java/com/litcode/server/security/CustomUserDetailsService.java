@@ -19,21 +19,21 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUserId(username)
+	public UserDetails loadUserByUsername(final String userId) throws UsernameNotFoundException {
+		User userModel = userRepository.findByUserId(userId)
 				.orElseThrow(() -> new UsernameNotFoundException("NOT FOUND USERNAME: " +
-						username));
+						userId));
 
-		return new CustomUserDetails(user);
+		return new CustomUserDetails(userModel);
 	}
 }
 
 class CustomUserDetails implements UserDetails {
 
-	private User user;
+	private User userModel;
 
-	public CustomUserDetails(User user) {
-		this.user = user;
+	public CustomUserDetails(User userModel) {
+		this.userModel = userModel;
 	}
 
 	@Override
@@ -48,16 +48,20 @@ class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return user.getPassword();
+		return userModel.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return user.getUserId();
+		return userModel.getUserId();
+	}
+
+	public String getName() {
+		return userModel.getName();
 	}
 
 	public String getUserEmail() {
-		return user.getEmail();
+		return userModel.getEmail();
 	}
 
 	@Override

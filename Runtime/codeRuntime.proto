@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_generic_services = true;
+option java_package ="com.litcode.server.grpcClient";
+option java_outer_classname = "CodeRuntimeProto";
+option objc_class_prefix = "CDRUN";
+
+service CodeRuntime {
+  // Define methods and they should be implemented in server-side.
+  rpc RunCode (RunRequest) returns (RunResponse) {}
+  rpc SubmitCode (SubmitRequest) returns (SubmitResponse) {}
+}
+
+message RunRequest {
+  string code = 1;
+  string input = 2;
+}
+
+message SubmitRequest {
+  string code = 1;
+  repeated TestCase testCaseList = 2;
+}
+
+message RunResponse {
+  string output = 1;
+}
+
+message SubmitResponse {
+  int32 score =1;
+  string output = 2;
+}
+
+message TestCase{
+  int32 score = 1;
+  string input =2;
+}
+// python3 -m grpc.tools.protoc -I. --python_out=Python/src --grpc_python_out=Python/src codeRuntime.proto
+// protoc --plugin=protoc-gen-grpc-java --proto_path=. --grpc-java_out=../API/src/main/java/ codeRuntime.proto 
+// protoc --proto_path=. --java_out=../API/src/main/java/ codeRuntime.proto 
+
+// protoc --plugin=protoc-gen-grpc-java --proto_path=. --grpc-java_out=./ codeRuntime.proto 

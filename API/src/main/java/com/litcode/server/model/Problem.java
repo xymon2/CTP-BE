@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Data
@@ -31,9 +34,11 @@ public class Problem {
 	@Column(name = "sample_input", columnDefinition = "TEXT", nullable = false)
 	private String sampleInput;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<SkeletonCode> skeletonCodeList;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<TestCase> testCaseList;
 }

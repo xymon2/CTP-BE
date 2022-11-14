@@ -16,6 +16,8 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Data
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id" }) })
@@ -27,6 +29,9 @@ public class User {
 
 	@Column(name = "user_id", nullable = false)
 	private String userId;
+
+	@Column(name = "name", nullable = false)
+	private String name;
 
 	@Column(name = "email", nullable = false)
 	private String email;
@@ -52,9 +57,11 @@ public class User {
 	@UpdateTimestamp
 	private Timestamp updated;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProblemInProgress> problemInProgressList;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProblemSolved> problemSolvedList;
 

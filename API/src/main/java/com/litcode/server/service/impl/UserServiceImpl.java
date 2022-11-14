@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 		UserProfile userProfile = UserProfile.builder()
 				.id(user.getId())
 				.userId(user.getUserId())
+				.name(user.getName())
 				.email(user.getEmail())
 				.solvedId(solvedId)
 				.build();
