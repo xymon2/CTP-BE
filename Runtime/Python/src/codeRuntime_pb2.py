@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x63odeRuntime.proto\")\n\nRunRequest\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\r\n\x05input\x18\x02 \x01(\t\">\n\rSubmitRequest\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x1f\n\x0ctestCaseList\x18\x02 \x03(\x0b\x32\t.TestCase\"\x1d\n\x0bRunResponse\x12\x0e\n\x06output\x18\x01 \x01(\t\"/\n\x0eSubmitResponse\x12\r\n\x05score\x18\x01 \x01(\x05\x12\x0e\n\x06output\x18\x02 \x01(\t\"(\n\x08TestCase\x12\r\n\x05score\x18\x01 \x01(\x05\x12\r\n\x05input\x18\x02 \x01(\t2f\n\x0b\x43odeRuntime\x12&\n\x07RunCode\x12\x0b.RunRequest\x1a\x0c.RunResponse\"\x00\x12/\n\nSubmitCode\x12\x0e.SubmitRequest\x1a\x0f.SubmitResponse\"\x00\x42>\n\x1d\x63om.litcode.server.grpcClientB\x10\x43odeRuntimeProtoP\x01\x88\x01\x01\xa2\x02\x05\x43\x44RUNb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x63odeRuntime.proto\")\n\nRunRequest\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\r\n\x05input\x18\x02 \x01(\t\">\n\rSubmitRequest\x12\x0c\n\x04\x63ode\x18\x01 \x01(\t\x12\x1f\n\x0ctestCaseList\x18\x02 \x03(\x0b\x32\t.TestCase\"-\n\x0bRunResponse\x12\x0e\n\x06output\x18\x01 \x01(\t\x12\x0e\n\x06stdout\x18\x02 \x01(\t\"/\n\x0eSubmitResponse\x12\r\n\x05score\x18\x01 \x01(\x05\x12\x0e\n\x06output\x18\x02 \x01(\t\"(\n\x08TestCase\x12\r\n\x05score\x18\x01 \x01(\x05\x12\r\n\x05input\x18\x02 \x01(\t2f\n\x0b\x43odeRuntime\x12&\n\x07RunCode\x12\x0b.RunRequest\x1a\x0c.RunResponse\"\x00\x12/\n\nSubmitCode\x12\x0e.SubmitRequest\x1a\x0f.SubmitResponse\"\x00\x42>\n\x1d\x63om.litcode.server.grpcClientB\x10\x43odeRuntimeProtoP\x01\x88\x01\x01\xa2\x02\x05\x43\x44RUNb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'codeRuntime_pb2', globals())
@@ -26,11 +26,11 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _SUBMITREQUEST._serialized_start=64
   _SUBMITREQUEST._serialized_end=126
   _RUNRESPONSE._serialized_start=128
-  _RUNRESPONSE._serialized_end=157
-  _SUBMITRESPONSE._serialized_start=159
-  _SUBMITRESPONSE._serialized_end=206
-  _TESTCASE._serialized_start=208
-  _TESTCASE._serialized_end=248
-  _CODERUNTIME._serialized_start=250
-  _CODERUNTIME._serialized_end=352
+  _RUNRESPONSE._serialized_end=173
+  _SUBMITRESPONSE._serialized_start=175
+  _SUBMITRESPONSE._serialized_end=222
+  _TESTCASE._serialized_start=224
+  _TESTCASE._serialized_end=264
+  _CODERUNTIME._serialized_start=266
+  _CODERUNTIME._serialized_end=368
 # @@protoc_insertion_point(module_scope)

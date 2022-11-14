@@ -24,6 +24,7 @@ message SubmitRequest {
 
 message RunResponse {
   string output = 1;
+  string stdout = 2;
 }
 
 message SubmitResponse {
