@@ -54,31 +54,31 @@ public class ProblemServiceImpl implements ProblemService {
 		return problem;
 	}
 
-	public ProblemInProgress getOneProblemInProgress(Integer problemId, String userId) {
+	public List<ProblemInProgress> getOneProblemInProgress(Integer problemId, String userId) {
 
 		User user = userRepository.findByUserId(userId).orElseThrow();
-		ProblemInProgress pip = problemInProgressRepository.findAllByProblemIdAndUserId(problemId, user.getId())
+		List<ProblemInProgress> pip = problemInProgressRepository.findAllByProblemIdAndUserId(problemId, user.getId())
 				.orElseThrow();
 
 		return pip;
 	}
 
 	public ProblemRunResponse runCode(Integer probId, String userId, String code, String input, String language) {
-
-		log.info(userId);
-
-		log.info("grpc start");
-
 		User user = userRepository.findByUserId(userId).orElseThrow();
 		Problem problem = problemRepository.findById(probId).orElseThrow();
 
-		ProblemInProgress pip = new ProblemInProgress();
-		pip.setLanguage(language);
-		pip.setCode(code);
-		pip.setProblem(problem);
-		pip.setUser(user);
+		ProblemInProgress problemIP = problemInProgressRepository
+				.findByProblemIdAndUserIdAndLanguage(problem.getId(), user.getId(), language).orElseGet(
+						() -> {
+							ProblemInProgress pip = new ProblemInProgress();
+							pip.setProblem(problem);
+							pip.setUser(user);
+							pip.setLanguage(language);
+							return pip;
+						});
 
-		problemInProgressRepository.save(pip);
+		problemIP.setCode(code);
+		problemInProgressRepository.save(problemIP);
 		return grpcClient.runCode(code, input, language);
 	}
 

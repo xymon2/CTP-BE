@@ -16,5 +16,5 @@ public interface ProblemService {
 
 	String submitCode();
 
-	ProblemInProgress getOneProblemInProgress(Integer problemId, String userId);
+	List<ProblemInProgress> getOneProblemInProgress(Integer problemId, String userId);
 }

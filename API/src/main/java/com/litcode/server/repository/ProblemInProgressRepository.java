@@ -1,5 +1,6 @@
 package com.litcode.server.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,5 +15,5 @@ public interface ProblemInProgressRepository extends JpaRepository<ProblemInProg
 
 	Optional<ProblemInProgress> findByProblemIdAndUserIdAndLanguage(Integer problemId, Integer userId, String language);
 
-	Optional<ProblemInProgress> findAllByProblemIdAndUserId(Integer problemId, Integer userId);
+	Optional<List<ProblemInProgress>> findAllByProblemIdAndUserId(Integer problemId, Integer userId);
 }

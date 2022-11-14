@@ -43,7 +43,7 @@ public class ProblemController {
 	}
 
 	@GetMapping("/{id}/progress")
-	private ResponseEntity<ProblemInProgress> getOneInProgressCode(Authentication authentication,
+	private ResponseEntity<List<ProblemInProgress>> getOneInProgressCode(Authentication authentication,
 			@PathVariable(name = "id") Integer id) {
 		return ResponseEntity.ok().body(problemService.getOneProblemInProgress(id, authentication.getName()));
 	}
