@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.litcode.server.dto.ProblemResponse;
 import com.litcode.server.dto.ProblemRunResponse;
 import com.litcode.server.dto.ProblemSummary;
 import com.litcode.server.grpcClient.GrpcClient;
@@ -49,9 +50,11 @@ public class ProblemServiceImpl implements ProblemService {
 		return problemList;
 	}
 
-	public Problem getOneProblem(Integer id) {
+	public ProblemResponse getOneProblemWithNoTestCases(Integer id) {
 		Problem problem = problemRepository.findById(1).orElseThrow();
-		return problem;
+		ProblemResponse probWithNoTestCases = new ProblemResponse(problem.getDescription(), problem.getSampleInput(),
+				problem.getSkeletonCodeList());
+		return probWithNoTestCases;
 	}
 
 	public List<ProblemInProgress> getOneProblemInProgress(Integer problemId, String userId) {
