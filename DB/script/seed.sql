@@ -35,14 +35,28 @@ console.log(output.a) // should be 0
 {"key" : [{"foo" : "bar"}]}
 ```
 ','{"a":1}');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (1,1,'JavaScript','JS solution');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (2,1,'Python3','Python3 solution');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (3,1,'Java','Python3 solution');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (1,1,'javascript',
+'function solution(input){
+    return input;
+}');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (2,1,'python',
+'def solution(input):
+    return input');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (3,1,'java','java solution');
+INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
+INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'string',
+'string',5);
+INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
 INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
 
 INSERT INTO problems (id,name,description,sample_input) VALUE (2,'sort','sortproblem','[1,5,2]');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (4,2,'JavaScript','JS solution');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (5,2,'Python3','Python3 solution');
-INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (6,2,'Java','JAVAsolution');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (4,2,'javascript',
+'function solution(input){
+    return input;
+}');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (5,2,'python',
+'def solution(input):
+    return input');
+INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (6,2,'java','JAVA solution');
 INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (2,2,'[1,4,2]','[1,2,4]',10);
 

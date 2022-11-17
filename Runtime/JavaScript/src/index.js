@@ -36,17 +36,18 @@ const util = require("util");
 const logger = winston.createLogger(option);
 
 function runCode(call, callback) {
-  logger.info("run start");
   const consolelogCb = console.log;
   try {
     const { code, input } = call.request;
+    logger.info("run start", { code: code, input: input });
+
     let stdOut = "";
     const stdOutCallback = (data) => {
       stdOut += util.format(data) + "\n";
     };
     const ret = run(code, input, stdOutCallback);
-    callback(null, { output: JSON.stringify(ret), stdout: String(stdOut) });
-    logger.info("run end");
+    callback(null, { output: JSON.stringify(ret), stdout: stdOut });
+    logger.info("run end", { output: ret, stdout: stdOut });
   } catch (e) {
     callback({ message: e.message, code: 500 });
     logger.error(e);
