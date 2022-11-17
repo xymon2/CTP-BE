@@ -19,6 +19,8 @@ class CodeRuntime(codeRuntime_pb2_grpc.CodeRuntimeServicer):
             code_lines = ""
             for line in lines:
                 code_lines += line+'\n'
+                
+            obj = json.loads(request.input)
 
             # store stdouts(print) and return value
             str_io = StringIO()
@@ -29,6 +31,7 @@ class CodeRuntime(codeRuntime_pb2_grpc.CodeRuntimeServicer):
             return codeRuntime_pb2.RunResponse(output=str(ret), stdout=str_io.getvalue())
         except Exception as e:
             print(e)
+
             context.set_code(500)
             context.set_details(str(e))
             logger.error(str(e))

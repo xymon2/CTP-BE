@@ -48,6 +48,7 @@ function runCode(call, callback) {
     const ret = run(code, input, stdOutCallback);
     callback(null, { output: JSON.stringify(ret), stdout: stdOut });
     logger.info("run end", { output: ret, stdout: stdOut });
+
   } catch (e) {
     callback({ message: e.message, code: 500 });
     logger.error(e);

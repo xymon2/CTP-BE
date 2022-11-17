@@ -35,6 +35,7 @@ console.log(output.a) // should be 0
 {"key" : [{"foo" : "bar"}]}
 ```
 ','{"a":1}');
+
 INSERT INTO skeleton_code(id,problem_id,language,code) VALUE (1,1,'javascript',
 'function solution(input){
     return input;
@@ -47,6 +48,7 @@ INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
 INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'string',
 'string',5);
 INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
+
 INSERT INTO test_cases(id,problem_id,input,output,score) VALUE (1,1,'1','1',5);
 
 INSERT INTO problems (id,name,description,sample_input) VALUE (2,'sort','sortproblem','[1,5,2]');
