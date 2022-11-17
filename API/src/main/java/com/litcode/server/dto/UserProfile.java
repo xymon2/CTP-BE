@@ -9,7 +9,6 @@ import lombok.NonNull;
 @Data
 public class UserProfile implements Serializable {
 
-  private Integer id;
   private String userId;
   private String name;
   private String email;
@@ -17,12 +16,10 @@ public class UserProfile implements Serializable {
 
   @Builder
   public UserProfile(
-      @NonNull Integer id,
       @NonNull String userId,
       @NonNull String name,
       @NonNull String email,
       @NonNull List<Object> solvedId) {
-    this.id = id;
     this.userId = userId;
     this.name = name;
     this.email = email;

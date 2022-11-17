@@ -51,7 +51,7 @@ public class ProblemServiceImpl implements ProblemService {
 	}
 
 	public ProblemResponse getOneProblemWithNoTestCases(Integer id) {
-		Problem problem = problemRepository.findById(1).orElseThrow();
+		Problem problem = problemRepository.findById(id).orElseThrow();
 		ProblemResponse probWithNoTestCases = new ProblemResponse(problem.getDescription(), problem.getSampleInput(),
 				problem.getSkeletonCodeList());
 		return probWithNoTestCases;
