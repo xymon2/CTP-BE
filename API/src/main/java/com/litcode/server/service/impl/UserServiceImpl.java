@@ -23,18 +23,15 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
-	public UserProfile getUserInfo(SignInRequest signInInfo) {
-		User user = userRepository.findByUserId(signInInfo.getId())
-				.orElseThrow(() -> new UsernameNotFoundException("NOT FOUND USERNAME: " +
-						signInInfo.getId()));
+	public UserProfile getUserInfoByUserId(String userId) {
+		User user = userRepository.findByUserId(userId)
+				.orElseThrow();
 
 		String solvedIdString = user.getSolvedId();
 		JsonParser jsonParser = new BasicJsonParser();
-
 		List<Object> solvedId = jsonParser.parseList(solvedIdString);
 
 		UserProfile userProfile = UserProfile.builder()
-				.id(user.getId())
 				.userId(user.getUserId())
 				.name(user.getName())
 				.email(user.getEmail())

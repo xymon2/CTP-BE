@@ -1,17 +1,16 @@
 function run(code, input, cb) {
   console.log = cb;
-  const template = `
-  try{
-    ${code}
+  const template = `${code}
     return solution(${input});
-  } catch(e){
-    return e;
-  }
   `;
 
-  const runFunc = new Function(template);
-  const ret = runFunc();
-  return ret;
+  try {
+    const runFunc = new Function(template);
+    const ret = runFunc();
+    return ret;
+  } catch (e) {
+    return e.message;
+  }
 }
 
 module.exports = { run };

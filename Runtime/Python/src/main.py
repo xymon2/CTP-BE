@@ -3,7 +3,6 @@ from concurrent import futures
 import logging
 from io import StringIO
 from contextlib import redirect_stdout
-import json
 import grpc
 import codeRuntime_pb2
 import codeRuntime_pb2_grpc
@@ -11,10 +10,11 @@ from run import run
 
 logger = logging.getLogger("Python-Runtime")
 
+
 class CodeRuntime(codeRuntime_pb2_grpc.CodeRuntimeServicer):
     def RunCode(self, request, context):
         try:
-            logger.info("run codes")
+            logger.info(f"run codes - \ncode:\n{request.code}\ninput:{request.input}")
             lines = request.code.splitlines()
             code_lines = ""
             for line in lines:
@@ -25,10 +25,13 @@ class CodeRuntime(codeRuntime_pb2_grpc.CodeRuntimeServicer):
             # store stdouts(print) and return value
             str_io = StringIO()
             with redirect_stdout(str_io):
-                ret = run(code_lines, obj)
-            logger.info(f"run end")
+                ret = run(code_lines, request.input)
+            logger.info(f"run end - {ret}")
+
             return codeRuntime_pb2.RunResponse(output=str(ret), stdout=str_io.getvalue())
         except Exception as e:
+            print(e)
+
             context.set_code(500)
             context.set_details(str(e))
             logger.error(str(e))
@@ -49,6 +52,7 @@ def serve():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(format='%(levelname)s:%(name)s [%(asctime)s] %(message)s',level=logging.INFO,datefmt='%Y-%m-%d %H:%M:%S')
+    logging.basicConfig(format='%(levelname)s:%(name)s [%(asctime)s] %(message)s',
+                        level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
     logger.info("grpc server start")
     serve()

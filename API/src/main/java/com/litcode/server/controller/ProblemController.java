@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.litcode.server.dto.ProblemResponse;
 import com.litcode.server.dto.ProblemRunRequest;
 import com.litcode.server.dto.ProblemRunResponse;
 import com.litcode.server.dto.ProblemSummary;
-import com.litcode.server.model.Problem;
 import com.litcode.server.model.ProblemInProgress;
 import com.litcode.server.repository.ProblemRepository;
 import com.litcode.server.service.ProblemService;
@@ -38,8 +38,8 @@ public class ProblemController {
 	}
 
 	@GetMapping("/{id}")
-	private ResponseEntity<Problem> getOneProblem(@PathVariable(name = "id") Integer id) {
-		return ResponseEntity.ok().body(problemService.getOneProblem(id));
+	private ResponseEntity<ProblemResponse> getOneProblemWithNoTestCases(@PathVariable(name = "id") Integer id) {
+		return ResponseEntity.ok().body(problemService.getOneProblemWithNoTestCases(id));
 	}
 
 	@GetMapping("/{id}/progress")
@@ -60,7 +60,7 @@ public class ProblemController {
 		return ResponseEntity.ok().body(res);
 	}
 
-	@PostMapping("/submit")
+	@PostMapping("/{id}/submit")
 	private String submitCode() {
 		throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED, "WAIT");
 	}
