@@ -1,5 +1,5 @@
 // GRPC setting
-const PROTO_PATH = __dirname + "/../../codeRuntime.proto";
+const PROTO_PATH = __dirname + "/../codeRuntime.proto";
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
@@ -48,7 +48,6 @@ function runCode(call, callback) {
     const ret = run(code, input, stdOutCallback);
     callback(null, { output: JSON.stringify(ret), stdout: stdOut });
     logger.info("run end", { output: ret, stdout: stdOut });
-
   } catch (e) {
     callback({ message: e.message, code: 500 });
     logger.error(e);
