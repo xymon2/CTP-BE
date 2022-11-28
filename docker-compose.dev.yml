@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  litcode-db:
+    extends:
+      file: ./DB/mysql.dev.yml
+      service: litcode-db
