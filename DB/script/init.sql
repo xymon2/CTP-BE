@@ -37,7 +37,8 @@ CREATE TABLE test_cases(
     REFERENCES problems(id) 
     ON DELETE CASCADE,
     input TEXT NOT NULL,
-    output TEXT NOT NULL,
+    py_script TEXT,
+    js_script TEXT,
     score INT DEFAULT 0
 );
 

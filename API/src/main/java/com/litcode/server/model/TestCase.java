@@ -32,8 +32,11 @@ public class TestCase {
 	@Column(name = "input", columnDefinition = "TEXT", nullable = false)
 	private String input;
 
-	@Column(name = "output", columnDefinition = "TEXT", nullable = false)
-	private String output;
+	@Column(name = "py_script", columnDefinition = "TEXT")
+	private String pyScript;
+	
+	@Column(name = "js_script", columnDefinition = "TEXT")
+	private String jsScript;
 
 	@Column(name = "score")
 	private Integer score;
