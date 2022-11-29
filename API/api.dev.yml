@@ -2,8 +2,9 @@ version: "3"
 
 services:
   litcode-api:
-    # image: litcode-api
-    build: .
+    image: litcode-api
+    # build: .
+    container_name: litcode-api
     ports:
       - 3003:3003
     networks:
