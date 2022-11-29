@@ -2,9 +2,9 @@ version: "3"
 
 services:
   litcode-db:
-    # mysql 8.0 - https://hub.docker.com/layers/library/mysql/8.0/images/sha256-fb3d8639a938515aaac38acb13c4acc061366a20322c55bbedae9d127cd2f2b3?context=explore
-    # image: mysql@sha256:fb3d8639a938515aaac38acb13c4acc061366a20322c55bbedae9d127cd2f2b3
-    image: arm64v8/mysql:8.0.31
+    image: mysql@sha256:3fdbc2ee9a80a661f4aa7009ea5b4f0680094a0ad3d89582cb6cbc558691daaa
+    # 8.0.31 linux/amd64
+    # image: mysql@sha256:a0b6340a3f236d39451f2373c5d137bf64eb54233163c186ef1480e8844f0ffd
     # for m1
     container_name: litcode-db
     # command: --default-authentication-plugin=mysql_native_password
@@ -20,3 +20,9 @@ services:
       - ./script/init.sql:/docker-entrypoint-initdb.d/init.sql
       - ./script/seed.sql:/docker-entrypoint-initdb.d/seed.sql
       - ./mysql:/var/lib/mysql
+    networks:
+      - litcode
+
+networks:
+  litcode:
+    name: litcode
