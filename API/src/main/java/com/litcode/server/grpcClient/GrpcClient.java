@@ -2,6 +2,7 @@ package com.litcode.server.grpcClient;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,6 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class GrpcClient {
 
+
+	@Value("${JS_GRPC_URL}")
+	private String jsGrpcUrl;
+
+	@Value("${JS_GRPC_PORT}")
+	private Integer jsGrpcPort;
+
 	private CodeRuntimeGrpc.CodeRuntimeBlockingStub pyStub;
 	private CodeRuntimeGrpc.CodeRuntimeBlockingStub jsStub;
 
@@ -24,7 +32,7 @@ public class GrpcClient {
 		// TODO
 		// apply env var
 		ManagedChannel pyChannel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
-		ManagedChannel jsChannel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
+		ManagedChannel jsChannel = ManagedChannelBuilder.forAddress(jsGrpcUrl, jsGrpcPort).usePlaintext().build();
 
 		this.pyStub = CodeRuntimeGrpc.newBlockingStub(pyChannel);
 		this.jsStub = CodeRuntimeGrpc.newBlockingStub(jsChannel);

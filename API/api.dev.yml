@@ -11,6 +11,8 @@ services:
       - litcode
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://litcode-db:3306/litcodedb
+      - JS_GRPC_URL=litcode-js
+      - JS_GRPC_PORT=50052
 
 networks:
   litcode:

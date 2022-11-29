@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  litcode-js:
+    image: litcode-js
+    restart: on-failure
+    ports:
+      - 50052:50052
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - litcode
+
+networks:
+  litcode:
+    name: litcode
