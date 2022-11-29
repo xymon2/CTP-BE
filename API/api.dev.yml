@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  litcode-api:
+    # image: litcode-api
+    build: .
+    ports:
+      - 3003:3003
+    networks:
+      - litcode
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://litcode-db:3306/litcodedb
+
+networks:
+  litcode:
+    name: litcode
